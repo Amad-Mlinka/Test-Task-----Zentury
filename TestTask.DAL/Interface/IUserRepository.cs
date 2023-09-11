@@ -10,6 +10,7 @@ namespace TestTask.DAL.Interface
 	public interface IUserRepository
 	{
 		Task<List<User>> GetAllAsync();
+		Task<GetUserResponse> GetAsync(int pageNumber, int pageSize = 10);
 		Task<User> GetByIdAsync(int id);
 		Task<User> AddAsync(User entity);
 		Task<User> UpdateAsync(User entity);

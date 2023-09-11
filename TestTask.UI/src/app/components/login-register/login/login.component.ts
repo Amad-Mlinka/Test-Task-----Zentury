@@ -37,7 +37,6 @@ export class LoginComponent {
       console.log(jwtDTO)
       if(jwtDTO.success){
         localStorage.setItem("jwtToken",jwtDTO.token);
-        this.authService.setAuthentification();
         this.router.navigate(['/users']);
         this.badLogin=false
   

@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using System.Text;
 using TestTask.BLL.DTO;
+using TestTask.BLL.Response;
+using TestTask.DAL.Models;
 using BLL = TestTask.BLL.Models;
 using DAL = TestTask.DAL.Models;
 using DTO = TestTask.BLL.DTO;
@@ -20,6 +22,8 @@ public class UserProfile : Profile
 		CreateMap<DAL.Login, DTO.LogDTO>().ReverseMap();
 		CreateMap<BLL.Login, DTO.LogDTO>().ReverseMap();
 		CreateMap<DAL.LoginsUser, DTO.LogDTO>().ReverseMap();
+		CreateMap<GetUserResponse, GetUsersResponse>().ReverseMap();
+
 
 		CreateMap<DAL.User, DAL.User>()
 		.ForMember(dest => dest.Id, opt => opt.Ignore())

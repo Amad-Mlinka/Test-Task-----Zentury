@@ -6,6 +6,7 @@ import { User } from 'src/app/models/User';
 import { UserService } from 'src/app/services/user-service';
 import { EditModalComponent } from '../../edit-modal/edit-modal.component';
 import { GetUsersResponse } from 'src/app/models/response/GetUsersResponse';
+import { MatSort } from '@angular/material/sort';
 
 
 @Component({
@@ -18,21 +19,22 @@ export class UserListComponent {
   editedUser?: User;
 
   dataSource = new MatTableDataSource<User>();
+
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-  
+  @ViewChild(MatSort) sort!: MatSort;
 
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
+
+  constructor(private userService: UserService,private dialog: MatDialog) {
+    
   }
-
-  constructor(private userService: UserService,private dialog: MatDialog) {}
 
   updateUsersList(){
     this.userService.getUsers()
     .subscribe(
       (result: GetUsersResponse)=>{
-        console.log(result);
-        this.dataSource.data = result.data;
+        this.dataSource = new MatTableDataSource<User>(result.data)
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
     });   
   }
 

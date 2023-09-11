@@ -1,3 +1,6 @@
+.mat-mdc-table{
+    margin-top: 120px;
+}
 .addNewButtonContainer{
     width: 100%;
     margin: 0;
@@ -35,6 +38,9 @@
 
 .editButton{
     background-color: yellow;
+}
+.mat-mdc-cell{
+    width: 50%;
 }
 
 @media (min-width: 426px) {

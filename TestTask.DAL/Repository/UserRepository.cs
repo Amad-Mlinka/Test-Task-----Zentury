@@ -29,6 +29,18 @@ namespace TestTask.DAL.Repository
 			return await _users.OrderByDescending(x=>x.Username).ToListAsync();
 		}
 
+		public async Task<GetUserResponse> GetAsync(int pageNumber,int pageSize=10)
+		{
+			GetUserResponse response = new();
+			var results =await _users.Skip((pageNumber*pageSize)-pageSize).Take(pageSize).ToListAsync();
+			response.Data = results;
+			response.Count = results.Count;
+			response.TotalCount = await _users.CountAsync();
+			response.PageNumber = pageNumber;
+			response.PageSize = pageSize;
+			return response;
+		}
+
 		public async Task<User> GetByIdAsync(int id)
 		{
 			return await _users.FindAsync(id);

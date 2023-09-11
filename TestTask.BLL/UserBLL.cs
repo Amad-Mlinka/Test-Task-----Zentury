@@ -20,9 +20,9 @@ namespace TestTask.BLL
 			_mapper = mapper;
 		}
 		#region Public Methods
-		public async Task<GetUsersResponse> GetAllAsync()
+		public async Task<GetAllUsersResponse> GetAllAsync()
 		{
-			GetUsersResponse response = new GetUsersResponse();
+			GetAllUsersResponse response = new GetAllUsersResponse();
 			try
 			{
 				var data = await _repository.GetAllAsync();
@@ -42,10 +42,37 @@ namespace TestTask.BLL
 			}
 		}
 
+		public async Task<GetUsersResponse> GetAsync(int pageSize, int pageNumber)
+		{
+			GetUsersResponse response = new GetUsersResponse();
+			try
+			{
+				var data = await _repository.GetAsync(pageNumber,pageSize);
+				response.Data = _mapper.Map<List<UserDTO>>(data.Data);
+				response.Success=true;
+				response.TotalCount = data.TotalCount;
+				response.Count = data.Count;	
+				response.PageNumber = pageNumber;
+				response.PageSize = pageSize;
+				return response;
+			}
+			catch (Exception ex)
+			{
+				response.Success = false;
+				response.Error = ex.Message;
+				response.Message = "";
+				response.Data = null;
+
+				return response;
+			}
+		}
+
 		public async Task<UserDTO> GetByIdAsync(int id)
 		{
 			return _mapper.Map<UserDTO>(await _repository.GetByIdAsync(id));
 		}
+
+		
 
 		public async Task<AddUserResponse> AddAsync(RegisterDTO user)
 		{

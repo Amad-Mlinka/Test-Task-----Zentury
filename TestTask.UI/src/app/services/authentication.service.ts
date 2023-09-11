@@ -31,11 +31,4 @@ export class AuthenticationService {
     return (localStorage.getItem("jwtToken")!= null)
   }
 
-  public setAuthentification(){
-    this.isAuthenticated=true;
-  }
-
-  public removeAuthentification(){
-    this.isAuthenticated=false;
-  }
 }
