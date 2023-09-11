@@ -31,14 +31,14 @@ namespace TestTask.DAL.Repository
 		{
 			return await _logins
 			.OrderByDescending(x => x.LoginTime)
-			.Include(l => l.User) // Include the related User
+			.Include(l => l.User) 
 			.Select(login => new LoginsUser
 			{
 				Id = login.Id,
-				Username = login.User.Username, // Access the User's Username
+				Username = login.User.Username, 
 				LoginTime = login.LoginTime,
 				Success = login.Success,
-				// Include other properties you need from the Login entity
+				
 			})
 			.ToListAsync();
 			}
@@ -49,14 +49,13 @@ namespace TestTask.DAL.Repository
 			 var results = await _logins
 			.Skip((pageNumber * pageSize) - pageSize)
 			.Take(pageSize)
-			.Include(l => l.User) // Include the related User
+			.Include(l => l.User) 
 			.Select(login => new LoginsUser
 			{
 				Id = login.Id,
-				Username = login.User.Username, // Access the User's Username
+				Username = login.User.Username, 
 				LoginTime = login.LoginTime,
 				Success = login.Success,
-				// Include other properties you need from the Login entity
 			})
 			.ToListAsync();
 			response.Data = results;

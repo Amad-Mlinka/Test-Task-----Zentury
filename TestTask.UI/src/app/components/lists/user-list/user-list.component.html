@@ -29,9 +29,11 @@
   <ng-container matColumnDef="actions">
     <th mat-header-cell *matHeaderCellDef> Actions </th>
     <td mat-cell *matCellDef="let user"> 
-      
-      <button [swal]="{ title: 'You are about to delete ' + user.username, showDenyButton: true, denyButtonText: 'Cancel',icon:'warning'}" (confirm)="deleteUser(user)" class="actionButton deleteButton"></button>  
-      <button (click)="openEditUserModal(user)" class="actionButton editButton"></button>  
+      <div class="actions">
+        <button mat-flat-button color="warn" [swal]="{ title: 'You are about to delete ' + user.username, showDenyButton: true, denyButtonText: 'Cancel',icon:'warning'}" (confirm)="deleteUser(user)" >Delete</button>  
+        <button mat-flat-button color="accent" (click)="openEditUserModal(user)" >Edit</button>  
+  
+      </div>
     
     </td>
   </ng-container>

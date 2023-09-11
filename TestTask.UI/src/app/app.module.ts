@@ -10,8 +10,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatSortModule} from '@angular/material/sort';
 import {MatButtonModule} from '@angular/material/button';
-import {MatIconModule} from '@angular/material/icon';
-
+import {NgxPaginationModule} from 'ngx-pagination';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -50,7 +49,7 @@ import { LoginListComponent } from './components/lists/login-list/login-list.com
     ReactiveFormsModule,
     MatSortModule,
     MatButtonModule,
-    MatIconModule
+    NgxPaginationModule
   ],
   providers: [{
     provide:HTTP_INTERCEPTORS,

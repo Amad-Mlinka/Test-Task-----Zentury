@@ -3,7 +3,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Log } from 'src/app/models/Log';
 import { LogService } from 'src/app/services/log.service';
-import { GetLogsResponse } from 'src/app/models/response/GetLogsResponse';
+import { GetLogsResponse } from 'src/app/models/response/GetAllLogsResponse';
 import { MatSort } from '@angular/material/sort';
 
 @Component({
@@ -25,7 +25,7 @@ export class LoginListComponent {
   }
 
   updateUsersList(){
-    this.logService.getLogs()
+    this.logService.getAllLogs()
     .subscribe(
       (result: GetLogsResponse)=>{
         this.dataSource = new MatTableDataSource<Log>(result.data)

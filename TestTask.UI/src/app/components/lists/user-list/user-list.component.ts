@@ -7,6 +7,7 @@ import { UserService } from 'src/app/services/user-service';
 import { EditModalComponent } from '../../edit-modal/edit-modal.component';
 import { GetUsersResponse } from 'src/app/models/response/GetUsersResponse';
 import { MatSort } from '@angular/material/sort';
+import { GetAllUsersResponse } from 'src/app/models/response/GetAllUsersResponse';
 
 
 @Component({
@@ -29,9 +30,9 @@ export class UserListComponent {
   }
 
   updateUsersList(){
-    this.userService.getUsers()
+    this.userService.getAllUsers()
     .subscribe(
-      (result: GetUsersResponse)=>{
+      (result: GetAllUsersResponse)=>{
         this.dataSource = new MatTableDataSource<User>(result.data)
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;

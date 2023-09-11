@@ -26,7 +26,7 @@ namespace TestTask.DAL.Repository
 
 		public async Task<List<User>> GetAllAsync()
 		{
-			return await _users.ToListAsync();
+			return await _users.OrderBy(x=>x.Username).ToListAsync();
 		}
 
 		public async Task<GetUserResponse> GetAsync(int pageNumber,int pageSize=10)
@@ -66,7 +66,7 @@ namespace TestTask.DAL.Repository
 
 		public async Task<User> UpdateAsync(User user)
 		{
-			var foundUser = await GetByUsernameAsync(user.Username);
+			var foundUser = await _context.Users.FindAsync(user.Id);
 			if (foundUser == null)
 			{
 				return null;

@@ -1,8 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.CodeAnalysis.Editing;
+﻿using Microsoft.AspNetCore.Mvc;
 using TestTask.BLL.Interface;
-using TestTask.BLL.Models;
 using TestTask.BLL.DTO;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
@@ -24,6 +21,7 @@ namespace TestTask.API.Controllers
 		}
 
 		[HttpGet, Authorize]
+		[Route("all")]
 		public async Task<ActionResult<GetAllUsersResponse>> GetAllUsers() {
 			GetAllUsersResponse response = await _usersBLL.GetAllAsync();
 
@@ -31,22 +29,14 @@ namespace TestTask.API.Controllers
 			return Ok(response);
 		}
 
-		[HttpGet("{pageNumber}/{pageSize}")]
-		public async Task<ActionResult<GetUsersResponse>> GetUsers(int pageNumber, int pageSize)
+		[HttpGet]
+		public async Task<ActionResult<GetUsersResponse>> GetUsers([FromQuery] int pageNumber, int pageSize)
 		{
 			GetUsersResponse response = await _usersBLL.GetAsync(pageNumber, pageSize);
 
 
 			return Ok(response);
 
-		}
-
-		[HttpGet("{id}"), Authorize]
-		public async Task<ActionResult<List<UserDTO>>> GetUserByID(int id)
-		{
-			var response = await _usersBLL.GetByIdAsync(id);
-
-			return Ok(_mapper.Map<UserDTO>(response));
 		}
 
 		[HttpPost, Authorize]

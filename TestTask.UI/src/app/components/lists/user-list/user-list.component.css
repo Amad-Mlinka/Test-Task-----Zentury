@@ -24,17 +24,10 @@
     background-color: #ffffff; /* Odd row background color */
   }
 
-.actionButton{
-    width: 20px;
-    height: 20px;
-}
-
-.deleteButton{
-    background-color: red;
-}
-
-.editButton{
-    background-color: yellow;
+.actions{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
 }
 
 @media (min-width: 426px) {

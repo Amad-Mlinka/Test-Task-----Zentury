@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TestTask.BLL;
 using TestTask.BLL.Interface;
@@ -21,7 +20,8 @@ namespace TestTask.API.Controllers
 			_mapper = mapper;
 		}
 
-		[HttpGet, Authorize]
+		[HttpGet,Authorize]
+		[Route("all")]
 		public async Task<ActionResult<GetAllLogsResponse>> GetAllLogsAsync()
 		{
 			GetAllLogsResponse response = await _logBLL.GetAllAsync();
@@ -33,8 +33,9 @@ namespace TestTask.API.Controllers
 			return Ok(response);
 		}
 
-		[HttpGet("{pageNumber}/{pageSize}")]
-		public async Task<ActionResult<GetLogsResponse>> GetLogs(int pageNumber, int pageSize)
+		[HttpGet]
+		[Route("paged")]
+		public async Task<ActionResult<GetLogsResponse>> GetLogs([FromQuery] int pageNumber, int pageSize)
 		{
 			GetLogsResponse response = await _logBLL.GetAsync(pageNumber, pageSize);
 

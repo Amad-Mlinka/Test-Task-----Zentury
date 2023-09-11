@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { User } from '../models/User';
 import { Observable } from 'rxjs';
 import { environment } from '../environment/environment';
+import { GetAllUsersResponse } from '../models/response/GetAllUsersResponse';
 import { GetUsersResponse } from '../models/response/GetUsersResponse';
 
 @Injectable({
@@ -11,8 +12,12 @@ import { GetUsersResponse } from '../models/response/GetUsersResponse';
 export class UserService {
   constructor(private http: HttpClient) { }
 
-  public getUsers() : Observable<GetUsersResponse> {
-    return this.http.get<GetUsersResponse>(`${environment.usersApi}`);
+  public getAllUsers() : Observable<GetAllUsersResponse> {
+    return this.http.get<GetAllUsersResponse>(`${environment.usersApi}/all`);
+  }
+
+  public getUsers(pageNumber:number=0,pageSize:number=10) : Observable<GetUsersResponse> {
+    return this.http.get<GetUsersResponse>(`${environment.usersApi}?pageNumber=${pageNumber}&pageSize=${pageSize}`);
   }
 
   public updateUser(user: User) : Observable<User[]> {
@@ -32,7 +37,7 @@ export class UserService {
 
   public deleteUser(user: User) : Observable<User[]> {
     return this.http.delete<User[]>(
-      `$${environment.usersApi}/${user.id}`
+      `${environment.usersApi}/${user.id}`
       );
   }
 }
