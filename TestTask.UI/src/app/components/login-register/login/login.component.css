@@ -1,0 +1,10 @@
+.input{
+    margin-bottom: 25px;
+}
+.form-group{
+    min-width: 200px;
+    max-width: 300px;
+}
+button{
+    float:right
+}

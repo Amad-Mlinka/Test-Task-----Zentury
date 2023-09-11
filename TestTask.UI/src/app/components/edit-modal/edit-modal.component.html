@@ -1,0 +1,65 @@
+<div>
+  <h2>{{newUser ? "Add User" : "Edit User"}}</h2>
+  <form [formGroup]="userForm" (ngSubmit)="saveChanges()">
+    <div class="form-group">
+      <input
+        type="number"
+        class="form-control"
+        id="id"
+        formControlName="username"
+        hidden
+      />
+    </div>
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input
+        type="text"
+        class="form-control"
+        id="username"
+        formControlName="username"
+        required
+        [class.is-invalid]="hasError('username', 'required')"
+      />
+      <div *ngIf="hasError('username', 'required')" class="invalid-feedback">
+        Username is required.
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input
+        type="email"
+        class="form-control"
+        id="email"
+        formControlName="email"
+        required
+        [class.is-invalid]="hasError('email', 'required') || hasError('email', 'pattern')"
+      />
+      <div *ngIf="hasError('email', 'required')" class="invalid-feedback">
+        Email is required.
+      </div>
+      <div *ngIf="hasError('email', 'email')" class="invalid-feedback">
+        Please enter a valid email address.
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input
+        type="password"
+        class="form-control"
+        id="password"
+        formControlName="password"
+        required
+        [class.is-invalid]="hasError('password', 'required') || hasError('password', 'pattern')"
+      />
+      <div *ngIf="hasError('password', 'required')" class="invalid-feedback">
+        Password is required.
+      </div>
+      <div *ngIf="hasError('password', 'pattern')" class="invalid-feedback">
+        Password must contain at least one uppercase letter and one digit (6 characters minimum).
+      </div>
+    </div>
+    <!-- Other fields here -->
+    <button type="submit" class="btn btn-primary">Save</button>
+    <button type="button" class="btn btn-secondary" (click)="cancel()">Cancel</button>
+  </form>
+</div>

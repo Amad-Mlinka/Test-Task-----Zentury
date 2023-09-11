@@ -1,0 +1,10 @@
+# Ignore .NET build artifacts and user-specific files
+bin/
+obj/
+*.user
+*.suo
+
+# Ignore Angular build artifacts
+node_modules/
+dist/
+*.log

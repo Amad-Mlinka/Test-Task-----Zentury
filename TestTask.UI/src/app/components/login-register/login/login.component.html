@@ -1,0 +1,43 @@
+<form [formGroup]="userForm" (ngSubmit)="saveChanges()">
+  <div class="form-group input">
+    <input
+      type="number"
+      class="form-control"
+      id="idLogin"
+      formControlName="username"
+      hidden
+    />
+    
+  </div>
+  <div class="form-group input">
+    <label for="username">Username</label>
+    <input
+      type="text"
+      class="form-control"
+      id="usernameLogin"
+      formControlName="username"
+      required
+      [class.is-invalid]="hasError()"
+    />
+    <div *ngIf="hasError()" class="invalid-feedback">
+      Username or password is wrong
+    </div>
+
+  </div>
+  <div class="form-group input">
+    <label for="password">Password</label>
+    <input
+      type="password"
+      class="form-control"
+      id="passwordLogin"
+      formControlName="password"
+      required
+      [class.is-invalid]="hasError()"
+    />
+    <div *ngIf="hasError()" class="invalid-feedback">
+      Username or password is wrong
+    </div>
+  </div>
+  <!-- Other fields here -->
+  <button type="submit" class="btn btn-primary">Save</button>
+</form>

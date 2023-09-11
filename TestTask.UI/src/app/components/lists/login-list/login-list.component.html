@@ -1,0 +1,18 @@
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8" >
+
+  <ng-container matColumnDef="Username">
+    <th mat-header-cell *matHeaderCellDef> Username </th>
+    <td mat-cell *matCellDef="let login"> {{login.username}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="Login Time">
+    <th mat-header-cell *matHeaderCellDef> Logged In Timestamp </th>
+    <td mat-cell *matCellDef="let login"> {{login.loginTime}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="['Username', 'Login Time']"></tr>
+  <tr mat-row *matRowDef="let row; columns: ['Username', 'Login Time']"></tr>
+</table>
+
+
+<mat-paginator #paginator [pageSizeOptions]="[5]" showFirstLastButtons></mat-paginator>
