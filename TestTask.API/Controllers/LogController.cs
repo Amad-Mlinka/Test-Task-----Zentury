@@ -33,8 +33,8 @@ namespace TestTask.API.Controllers
 			return Ok(response);
 		}
 
-		[HttpGet]
-		[Route("paged")]
+		[HttpGet, Authorize]
+		[Route("paged")]//Didnt work without some route, no idea why
 		public async Task<ActionResult<GetLogsResponse>> GetLogs([FromQuery] int pageNumber, int pageSize)
 		{
 			GetLogsResponse response = await _logBLL.GetAsync(pageNumber, pageSize);

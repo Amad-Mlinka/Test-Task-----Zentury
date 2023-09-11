@@ -29,7 +29,7 @@ namespace TestTask.API.Controllers
 			return Ok(response);
 		}
 
-		[HttpGet]
+		[HttpGet, Authorize]
 		public async Task<ActionResult<GetUsersResponse>> GetUsers([FromQuery] int pageNumber, int pageSize)
 		{
 			GetUsersResponse response = await _usersBLL.GetAsync(pageNumber, pageSize);
