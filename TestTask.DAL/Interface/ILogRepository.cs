@@ -10,6 +10,7 @@ namespace TestTask.DAL.Interface
 	public interface ILogRepository
 	{
 		Task<List<LoginsUser>> GetAllAsync();
+		Task<GetLogResponse> GetAsync(int pageNumber, int pageSize=10);
 		Task<Login> LogLoginAttempt(User user, bool success);
 	}
 }

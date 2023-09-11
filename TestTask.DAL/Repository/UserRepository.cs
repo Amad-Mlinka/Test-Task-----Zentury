@@ -26,7 +26,7 @@ namespace TestTask.DAL.Repository
 
 		public async Task<List<User>> GetAllAsync()
 		{
-			return await _users.OrderByDescending(x=>x.Username).ToListAsync();
+			return await _users.ToListAsync();
 		}
 
 		public async Task<GetUserResponse> GetAsync(int pageNumber,int pageSize=10)

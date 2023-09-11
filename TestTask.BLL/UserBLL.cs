@@ -11,10 +11,10 @@ namespace TestTask.BLL
 {
 	public class UserBLL : IBLL
 	{
-		private readonly IUserRepository _repository; // Use the generic IUserRepository<User>
+		private readonly IUserRepository _repository;
 		private readonly IMapper _mapper;
 
-		public UserBLL(IUserRepository repository, IMapper mapper) // Inject the generic IUserRepository<User>
+		public UserBLL(IUserRepository repository, IMapper mapper) 
 		{
 			_repository = repository;
 			_mapper = mapper;
@@ -42,7 +42,7 @@ namespace TestTask.BLL
 			}
 		}
 
-		public async Task<GetUsersResponse> GetAsync(int pageSize, int pageNumber)
+		public async Task<GetUsersResponse> GetAsync(int pageNumber, int pageSize)
 		{
 			GetUsersResponse response = new GetUsersResponse();
 			try
@@ -230,10 +230,8 @@ namespace TestTask.BLL
 
 		static bool IsPasswordValid(string password)
 		{
-			// Define the regular expression pattern
 			string pattern = @"^(?=.*[A-Z])(?=.*\d).{6,}$";
 
-			// Use Regex.IsMatch to check if the password matches the pattern
 			bool isMatch = Regex.IsMatch(password, pattern);
 
 			return isMatch;
@@ -241,10 +239,8 @@ namespace TestTask.BLL
 
 		static bool IsEmailValid(string email)
 		{
-			// Define the regular expression pattern
 			string pattern = @"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$";
 
-			// Use Regex.IsMatch to check if the password matches the pattern
 			bool isMatch = Regex.IsMatch(email, pattern);
 
 			return isMatch;
@@ -258,16 +254,6 @@ namespace TestTask.BLL
 				passwordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
 			}
 		}
-
-		private bool VerifyPasswordHash(string password, byte[] passwordHash, byte[] passwordSalt)
-		{
-			using (var hmac = new HMACSHA512(passwordSalt))
-			{
-				var computedHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
-				return computedHash.SequenceEqual(passwordHash);
-			}
-		}
-
 		#endregion
 	}
 }

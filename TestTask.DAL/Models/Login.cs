@@ -12,9 +12,7 @@ namespace TestTask.DAL.Models
 		public DateTime LoginTime { get; set; }
 		public bool Success { get; set; }
 
-		// Foreign key property
 		public int UserId { get; set; }
-		// Navigation property for the related User
 		public User User { get; set; }
 	}
 }

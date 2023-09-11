@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TestTask.BLL.DTO;
 
-namespace TestTask.BLL.Response
+namespace TestTask.DAL.Models
 {
-	public class GetLogsResponse : BaseResponse
+	public class GetLogResponse
 	{
-		public List<LogDTO> Data { get; set; }
+		public List<LoginsUser> Data { get; set; }
 		public int Count { get; set; }
 		public int PageNumber { get; set; }
 		public int PageSize { get; set; }

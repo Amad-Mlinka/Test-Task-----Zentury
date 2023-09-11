@@ -165,10 +165,8 @@ namespace TestTask.BLL
 
 		static bool IsPasswordValid(string password)
 		{
-			// Define the regular expression pattern
 			string pattern = @"^(?=.*[A-Z])(?=.*\d).{6,}$";
 
-			// Use Regex.IsMatch to check if the password matches the pattern
 			bool isMatch = Regex.IsMatch(password, pattern);
 
 			return isMatch;
@@ -176,10 +174,8 @@ namespace TestTask.BLL
 
 		static bool IsEmailValid(string email)
 		{
-			// Define the regular expression pattern
 			string pattern = @"^[\w\.-]+@[\w\.-]+\.\w+$";
 
-			// Use Regex.IsMatch to check if the password matches the pattern
 			bool isMatch = Regex.IsMatch(email, pattern);
 
 			return isMatch;

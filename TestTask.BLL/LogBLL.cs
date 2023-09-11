@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TestTask.BLL.DTO;
 using TestTask.BLL.Interface;
 using TestTask.BLL.Response;
 using TestTask.DAL.Interface;
@@ -24,9 +25,9 @@ namespace TestTask.BLL
 			_configuration = configuration;
 		}
 
-		public async Task<GetLogsResponse> GetAllAsync()
+		public async Task<GetAllLogsResponse> GetAllAsync()
 		{
-			GetLogsResponse response = new();
+			GetAllLogsResponse response = new();
 
 			try
 			{
@@ -42,6 +43,32 @@ namespace TestTask.BLL
 				return response;
 			}
 		}
+
+		public async Task<GetLogsResponse> GetAsync(int pageNumber, int pageSize)
+		{
+			GetLogsResponse response = new GetLogsResponse();
+			try
+			{
+				var data = await _repository.GetAsync(pageNumber, pageSize);
+				response.Data = _mapper.Map<List<LogDTO>>(data.Data);
+				response.Success = true;
+				response.TotalCount = data.TotalCount;
+				response.Count = data.Count;
+				response.PageNumber = pageNumber;
+				response.PageSize = pageSize;
+				return response;
+			}
+			catch (Exception ex)
+			{
+				response.Success = false;
+				response.Error = ex.Message;
+				response.Message = "";
+				response.Data = null;
+
+				return response;
+			}
+		}
+
 
 
 	}

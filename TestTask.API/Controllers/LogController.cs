@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using TestTask.BLL;
 using TestTask.BLL.Interface;
 using TestTask.BLL.Response;
 
@@ -21,15 +22,25 @@ namespace TestTask.API.Controllers
 		}
 
 		[HttpGet, Authorize]
-		public async Task<ActionResult<GetLogsResponse>> GetAllLogsAsync()
+		public async Task<ActionResult<GetAllLogsResponse>> GetAllLogsAsync()
 		{
-			GetLogsResponse response = await _logBLL.GetAllAsync();
+			GetAllLogsResponse response = await _logBLL.GetAllAsync();
 			if (!response.Success)
 			{
 				return BadRequest(response);
 			}
 
 			return Ok(response);
+		}
+
+		[HttpGet("{pageNumber}/{pageSize}")]
+		public async Task<ActionResult<GetLogsResponse>> GetLogs(int pageNumber, int pageSize)
+		{
+			GetLogsResponse response = await _logBLL.GetAsync(pageNumber, pageSize);
+
+
+			return Ok(response);
+
 		}
 	}
 }

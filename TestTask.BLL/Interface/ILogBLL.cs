@@ -9,6 +9,7 @@ namespace TestTask.BLL.Interface
 {
 	public interface ILogBLL
 	{
-		Task<GetLogsResponse> GetAllAsync();
+		Task<GetAllLogsResponse> GetAllAsync();
+		Task<GetLogsResponse> GetAsync(int pageNumber, int pageSize);
 	}
 }

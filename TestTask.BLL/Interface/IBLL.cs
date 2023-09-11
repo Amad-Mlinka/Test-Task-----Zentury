@@ -6,7 +6,7 @@ namespace TestTask.BLL.Interface
 	public interface IBLL
 	{
 		Task<GetAllUsersResponse> GetAllAsync();
-		Task<GetUsersResponse> GetAsync(int pageSize, int pageNumber);
+		Task<GetUsersResponse> GetAsync(int pageNumber, int pageSize);
 		Task<AddUserResponse> AddAsync(RegisterDTO user);
 		Task<UserDTO> GetByIdAsync(int id);
 		Task<EditUserResponse> UpdateAsync(RegisterDTO item);

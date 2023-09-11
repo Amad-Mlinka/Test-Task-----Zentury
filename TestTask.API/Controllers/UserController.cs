@@ -23,11 +23,18 @@ namespace TestTask.API.Controllers
 			_mapper = mapper;
 		}
 
-		
-		[HttpGet("{pageSize}/{pageNumber}")]
-		public async Task<ActionResult<GetUsersResponse>> GetUsers(int pageSize,int pageNumber)
+		[HttpGet, Authorize]
+		public async Task<ActionResult<GetAllUsersResponse>> GetAllUsers() {
+			GetAllUsersResponse response = await _usersBLL.GetAllAsync();
+
+			
+			return Ok(response);
+		}
+
+		[HttpGet("{pageNumber}/{pageSize}")]
+		public async Task<ActionResult<GetUsersResponse>> GetUsers(int pageNumber, int pageSize)
 		{
-			GetUsersResponse response = await _usersBLL.GetAsync(pageSize,pageNumber);
+			GetUsersResponse response = await _usersBLL.GetAsync(pageNumber, pageSize);
 
 
 			return Ok(response);
